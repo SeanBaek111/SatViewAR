@@ -2,7 +2,8 @@
 
 ## Abstract
 This iPhone application leverages AR (Augmented Reality) technology to visually map satellites that can be received at the user's current location in three-dimensional space. This intuitive method aids in identifying Non-Line-Of-Sight (NLOS) satellites, a common issue in urban canyons, forested, and mountainous areas where GPS errors can range from a few to tens of meters. Additionally, AI is incorporated to enhance the determination of the NLOS state of satellites. The app presents a fast, convenient, and low-cost solution for NLOS detection, improving accuracy in various fields such as autonomous driving, aviation, and military operations.
-![telegram-cloud-photo-size-5-6206302282333665263-y](https://github.com/SeanBaek111/SatViewAR/assets/33170173/f3725f71-8993-425c-a8aa-cfd17976e8ec)
+<img src="https://github.com/SeanBaek111/SatViewAR/assets/33170173/f3725f71-8993-425c-a8aa-cfd17976e8ec" width="512">
+
 
 ## Features
 

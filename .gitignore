@@ -1,0 +1,89 @@
+# Xcode
+#
+# gitignore contributors: remember to update Global/Xcode.gitignore, Objective-C.gitignore & Swift.gitignore
+
+## User settings
+xcuserdata/
+*.xcuserstate
+
+## Project settings
+project.xcworkspace/
+
+# CocoaPods
+Pods/
+
+# Carthage
+Carthage/Build
+
+# Swift Package Manager
+.build/
+
+# The file can also include personal SPM packages you don't want to check in.
+.DS_Store
+
+## Build generated
+build/
+DerivedData/
+
+## Various settings
+*.pbxuser
+!default.pbxuser
+*.mode1v3
+!default.mode1v3
+*.mode2v3
+!default.mode2v3
+*.perspectivev3
+!default.perspectivev3
+xcuserdata/
+
+## Other
+*.moved-aside
+*.xccheckout
+*.xcscmblueprint
+
+# Swift PM
+.swiftpm/xcode/package.xcworkspace/xcshareddata/
+.swiftpm/xcode/package.xcworkspace/xcuserdata/
+
+# Swift Playground
+timeline.xctimeline
+playground.xcworkspace
+
+# Package.resolved can be part of your VCS in some workflows, so this rule is up to you
+*.playground/Sources
+*.playground/Resources
+
+# Created by https://www.toptal.com/developers/gitignore/api/xcode
+# Edit at https://www.toptal.com/developers/gitignore?templates=xcode
+
+### Xcode ###
+# Xcode Derived Data
+DerivedData/
+
+# Xcode build output
+Build/
+
+# Xcode archives
+Archives/
+
+# Xcode Previews
+previews/
+
+# Xcode Previews
+*.swiftpm/
+
+# Xcode generated files
+*.xcodeproj/project.xcworkspace/xcuserdata/
+*.xcodeproj/xcuserdata/
+*.xcodeproj/project.xcworkspace/
+*.xcodeproj/project.xcworkspace/xcshareddata/WorkspaceSettings.xcsettings
+
+# Xcode Scheme
+xcuserdata/
+
+# xccovreport
+*.xccovreport
+
+# xccovarchive
+*.xccovarchive
+

@@ -298,9 +298,9 @@ class ViewController: UIViewController, ARSCNViewDelegate, CLLocationManagerDele
 
    
     @objc func captureScreen(_ sender: UIButton) {
-        DispatchQueue.main.async {
-            self.satellitesStatusLabel.text = "Loading..."
-           }
+//        DispatchQueue.main.async {
+//            self.satellitesStatusLabel.text = "Loading..."
+//           }
         // hide all satellite objects
         arView.scene.rootNode.enumerateChildNodes { (node, _) in
             if node.name == "satellite" {
@@ -408,9 +408,9 @@ class ViewController: UIViewController, ARSCNViewDelegate, CLLocationManagerDele
             self.nlosLabel.text = " NLOS: -"
             self.scrollView.isHidden = false
             self.satelliteCountLabel.text = "Loading..."
-            self.satellitesStatusLabel.isHidden = false
-            self.view.bringSubviewToFront(self.scrollView)
-            self.view.bringSubviewToFront(self.satellitesStatusLabel)
+           // self.satellitesStatusLabel.isHidden = false
+           // self.view.bringSubviewToFront(self.scrollView)
+           // self.view.bringSubviewToFront(self.satellitesStatusLabel)
             
           
         }
@@ -452,7 +452,7 @@ class ViewController: UIViewController, ARSCNViewDelegate, CLLocationManagerDele
                         for sat in parsedSatellites{
                             satellitesStatus +=  sat.getSatelliteInfo()
                         }
-                        self.satellitesStatusLabel.text = satellitesStatus
+                            //  self.satellitesStatusLabel.text = satellitesStatus
                     }
                 }
 

@@ -1,5 +1,0 @@
- extern const unsigned char Pods_gnssfinderVersionString[];
- extern const double Pods_gnssfinderVersionNumber;
-
- const unsigned char Pods_gnssfinderVersionString[] __attribute__ ((used)) = "@(#)PROGRAM:Pods_gnssfinder  PROJECT:Pods-1" "\n";
- const double Pods_gnssfinderVersionNumber __attribute__ ((used)) = (double)1.;

@@ -1,0 +1,483 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 56;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		1417AD572ABF2B1A008EF17D /* sat3.scn in Resources */ = {isa = PBXBuildFile; fileRef = 1417AD562ABF2B1A008EF17D /* sat3.scn */; };
+		1417AD592ABF3959008EF17D /* earth.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = 1417AD582ABF3959008EF17D /* earth.jpeg */; };
+		1417AD5B2ABF396E008EF17D /* space.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = 1417AD5A2ABF396E008EF17D /* space.jpeg */; };
+		1436D2102AF78C0800947DFF /* sky_model_meta.tflite in Resources */ = {isa = PBXBuildFile; fileRef = 1436D20F2AF78C0800947DFF /* sky_model_meta.tflite */; };
+		1436D2122AF78CC100947DFF /* lite-model_deeplabv3-mobilenetv2-ade20k_1_default_2.tflite in Resources */ = {isa = PBXBuildFile; fileRef = 1436D2112AF78CC100947DFF /* lite-model_deeplabv3-mobilenetv2-ade20k_1_default_2.tflite */; };
+		1436D21B2AF7943C00947DFF /* UIImage_Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1436D21A2AF7943C00947DFF /* UIImage_Extension.swift */; };
+		14457C3B2AC064DE000EBBFF /* satellite.png in Resources */ = {isa = PBXBuildFile; fileRef = 14457C3A2AC064DE000EBBFF /* satellite.png */; };
+		14457C3F2AC10C01000EBBFF /* ImageSegmentationHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14457C3E2AC10C01000EBBFF /* ImageSegmentationHelper.swift */; };
+		14457C412AC10C0C000EBBFF /* TFLiteExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14457C402AC10C0C000EBBFF /* TFLiteExtension.swift */; };
+		14457C452AC10CE2000EBBFF /* UIKitExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14457C442AC10CE2000EBBFF /* UIKitExtension.swift */; };
+		147818E82AB86437009FCFBA /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 147818E72AB86437009FCFBA /* AppDelegate.swift */; };
+		147818EA2AB86437009FCFBA /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 147818E92AB86437009FCFBA /* SceneDelegate.swift */; };
+		147818EC2AB86437009FCFBA /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 147818EB2AB86437009FCFBA /* ViewController.swift */; };
+		147818EF2AB86437009FCFBA /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 147818ED2AB86437009FCFBA /* Main.storyboard */; };
+		147818F12AB86438009FCFBA /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 147818F02AB86438009FCFBA /* Assets.xcassets */; };
+		147818F42AB86438009FCFBA /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 147818F22AB86438009FCFBA /* LaunchScreen.storyboard */; };
+		147818FC2AB870F8009FCFBA /* Satellite.swift in Sources */ = {isa = PBXBuildFile; fileRef = 147818FB2AB870F7009FCFBA /* Satellite.swift */; };
+		147818FE2AB8711A009FCFBA /* DataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 147818FD2AB8711A009FCFBA /* DataManager.swift */; };
+		14DEC0912AC175FF00E3AB3A /* nlos.png in Resources */ = {isa = PBXBuildFile; fileRef = 14DEC0902AC175FF00E3AB3A /* nlos.png */; };
+		BD656443077FF1FF9D873A01 /* Pods_GnssFinder.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 391607379A3915C10960E8B8 /* Pods_GnssFinder.framework */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		03F74E0235BCC1CDBED51A72 /* Pods-GnssFinder.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GnssFinder.release.xcconfig"; path = "Target Support Files/Pods-GnssFinder/Pods-GnssFinder.release.xcconfig"; sourceTree = "<group>"; };
+		1417AD562ABF2B1A008EF17D /* sat3.scn */ = {isa = PBXFileReference; lastKnownFileType = file.bplist; path = sat3.scn; sourceTree = "<group>"; };
+		1417AD582ABF3959008EF17D /* earth.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = earth.jpeg; sourceTree = "<group>"; };
+		1417AD5A2ABF396E008EF17D /* space.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = space.jpeg; sourceTree = "<group>"; };
+		1436D20F2AF78C0800947DFF /* sky_model_meta.tflite */ = {isa = PBXFileReference; lastKnownFileType = file; path = sky_model_meta.tflite; sourceTree = "<group>"; };
+		1436D2112AF78CC100947DFF /* lite-model_deeplabv3-mobilenetv2-ade20k_1_default_2.tflite */ = {isa = PBXFileReference; lastKnownFileType = file; path = "lite-model_deeplabv3-mobilenetv2-ade20k_1_default_2.tflite"; sourceTree = "<group>"; };
+		1436D21A2AF7943C00947DFF /* UIImage_Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIImage_Extension.swift; sourceTree = "<group>"; };
+		14457C3A2AC064DE000EBBFF /* satellite.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = satellite.png; sourceTree = "<group>"; };
+		14457C3E2AC10C01000EBBFF /* ImageSegmentationHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageSegmentationHelper.swift; sourceTree = "<group>"; };
+		14457C402AC10C0C000EBBFF /* TFLiteExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TFLiteExtension.swift; sourceTree = "<group>"; };
+		14457C442AC10CE2000EBBFF /* UIKitExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIKitExtension.swift; sourceTree = "<group>"; };
+		147818E42AB86437009FCFBA /* SatViewAR.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SatViewAR.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		147818E72AB86437009FCFBA /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		147818E92AB86437009FCFBA /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
+		147818EB2AB86437009FCFBA /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		147818EE2AB86437009FCFBA /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		147818F02AB86438009FCFBA /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		147818F32AB86438009FCFBA /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		147818F52AB86438009FCFBA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		147818FB2AB870F7009FCFBA /* Satellite.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Satellite.swift; sourceTree = "<group>"; };
+		147818FD2AB8711A009FCFBA /* DataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataManager.swift; sourceTree = "<group>"; };
+		14DEC0902AC175FF00E3AB3A /* nlos.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = nlos.png; sourceTree = "<group>"; };
+		391607379A3915C10960E8B8 /* Pods_GnssFinder.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_GnssFinder.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		F1F4109E16320F4734685D8E /* Pods-GnssFinder.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GnssFinder.debug.xcconfig"; path = "Target Support Files/Pods-GnssFinder/Pods-GnssFinder.debug.xcconfig"; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		147818E12AB86437009FCFBA /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				BD656443077FF1FF9D873A01 /* Pods_GnssFinder.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		14470C402AC325F400D098A3 /* Assets */ = {
+			isa = PBXGroup;
+			children = (
+				1417AD562ABF2B1A008EF17D /* sat3.scn */,
+				1436D2112AF78CC100947DFF /* lite-model_deeplabv3-mobilenetv2-ade20k_1_default_2.tflite */,
+				1436D20F2AF78C0800947DFF /* sky_model_meta.tflite */,
+				1417AD582ABF3959008EF17D /* earth.jpeg */,
+				14457C3A2AC064DE000EBBFF /* satellite.png */,
+				1417AD5A2ABF396E008EF17D /* space.jpeg */,
+				147818F02AB86438009FCFBA /* Assets.xcassets */,
+				14DEC0902AC175FF00E3AB3A /* nlos.png */,
+			);
+			path = Assets;
+			sourceTree = "<group>";
+		};
+		147818DB2AB86437009FCFBA = {
+			isa = PBXGroup;
+			children = (
+				147818E62AB86437009FCFBA /* gnssfinder */,
+				147818E52AB86437009FCFBA /* Products */,
+				9C66E240B96FBC1A155DFD82 /* Pods */,
+				9B65B146373967B87215A0FC /* Frameworks */,
+			);
+			sourceTree = "<group>";
+		};
+		147818E52AB86437009FCFBA /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				147818E42AB86437009FCFBA /* SatViewAR.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		147818E62AB86437009FCFBA /* gnssfinder */ = {
+			isa = PBXGroup;
+			children = (
+				14470C402AC325F400D098A3 /* Assets */,
+				147818E72AB86437009FCFBA /* AppDelegate.swift */,
+				147818E92AB86437009FCFBA /* SceneDelegate.swift */,
+				147818EB2AB86437009FCFBA /* ViewController.swift */,
+				147818FD2AB8711A009FCFBA /* DataManager.swift */,
+				147818ED2AB86437009FCFBA /* Main.storyboard */,
+				14457C3E2AC10C01000EBBFF /* ImageSegmentationHelper.swift */,
+				14457C402AC10C0C000EBBFF /* TFLiteExtension.swift */,
+				14457C442AC10CE2000EBBFF /* UIKitExtension.swift */,
+				147818FB2AB870F7009FCFBA /* Satellite.swift */,
+				147818F22AB86438009FCFBA /* LaunchScreen.storyboard */,
+				147818F52AB86438009FCFBA /* Info.plist */,
+				1436D21A2AF7943C00947DFF /* UIImage_Extension.swift */,
+			);
+			path = gnssfinder;
+			sourceTree = "<group>";
+		};
+		9B65B146373967B87215A0FC /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				391607379A3915C10960E8B8 /* Pods_GnssFinder.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		9C66E240B96FBC1A155DFD82 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				F1F4109E16320F4734685D8E /* Pods-GnssFinder.debug.xcconfig */,
+				03F74E0235BCC1CDBED51A72 /* Pods-GnssFinder.release.xcconfig */,
+			);
+			path = Pods;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		147818E32AB86437009FCFBA /* GnssFinder */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 147818F82AB86438009FCFBA /* Build configuration list for PBXNativeTarget "GnssFinder" */;
+			buildPhases = (
+				B4597355C7D4A4F1E05B8AE5 /* [CP] Check Pods Manifest.lock */,
+				147818E02AB86437009FCFBA /* Sources */,
+				147818E12AB86437009FCFBA /* Frameworks */,
+				147818E22AB86437009FCFBA /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = GnssFinder;
+			productName = gnssfinder;
+			productReference = 147818E42AB86437009FCFBA /* SatViewAR.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		147818DC2AB86437009FCFBA /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = 1;
+				LastSwiftUpdateCheck = 1430;
+				LastUpgradeCheck = 1500;
+				TargetAttributes = {
+					147818E32AB86437009FCFBA = {
+						CreatedOnToolsVersion = 14.3.1;
+					};
+				};
+			};
+			buildConfigurationList = 147818DF2AB86437009FCFBA /* Build configuration list for PBXProject "GnssFinder" */;
+			compatibilityVersion = "Xcode 14.0";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 147818DB2AB86437009FCFBA;
+			productRefGroup = 147818E52AB86437009FCFBA /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				147818E32AB86437009FCFBA /* GnssFinder */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		147818E22AB86437009FCFBA /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				14457C3B2AC064DE000EBBFF /* satellite.png in Resources */,
+				147818F42AB86438009FCFBA /* LaunchScreen.storyboard in Resources */,
+				1436D2102AF78C0800947DFF /* sky_model_meta.tflite in Resources */,
+				14DEC0912AC175FF00E3AB3A /* nlos.png in Resources */,
+				1417AD572ABF2B1A008EF17D /* sat3.scn in Resources */,
+				147818F12AB86438009FCFBA /* Assets.xcassets in Resources */,
+				1417AD592ABF3959008EF17D /* earth.jpeg in Resources */,
+				1417AD5B2ABF396E008EF17D /* space.jpeg in Resources */,
+				1436D2122AF78CC100947DFF /* lite-model_deeplabv3-mobilenetv2-ade20k_1_default_2.tflite in Resources */,
+				147818EF2AB86437009FCFBA /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		B4597355C7D4A4F1E05B8AE5 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-GnssFinder-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		147818E02AB86437009FCFBA /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				14457C412AC10C0C000EBBFF /* TFLiteExtension.swift in Sources */,
+				147818EC2AB86437009FCFBA /* ViewController.swift in Sources */,
+				14457C452AC10CE2000EBBFF /* UIKitExtension.swift in Sources */,
+				14457C3F2AC10C01000EBBFF /* ImageSegmentationHelper.swift in Sources */,
+				147818FC2AB870F8009FCFBA /* Satellite.swift in Sources */,
+				1436D21B2AF7943C00947DFF /* UIImage_Extension.swift in Sources */,
+				147818FE2AB8711A009FCFBA /* DataManager.swift in Sources */,
+				147818E82AB86437009FCFBA /* AppDelegate.swift in Sources */,
+				147818EA2AB86437009FCFBA /* SceneDelegate.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		147818ED2AB86437009FCFBA /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				147818EE2AB86437009FCFBA /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		147818F22AB86438009FCFBA /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				147818F32AB86438009FCFBA /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		147818F62AB86438009FCFBA /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "";
+				IPHONEOS_DEPLOYMENT_TARGET = 16.4;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		147818F72AB86438009FCFBA /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				"INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone[sdk=*]" = "";
+				IPHONEOS_DEPLOYMENT_TARGET = 16.4;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		147818F92AB86438009FCFBA /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = F1F4109E16320F4734685D8E /* Pods-GnssFinder.debug.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 86A2R9G9DS;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = gnssfinder/Info.plist;
+				INFOPLIST_KEY_NSCameraUsageDescription = "We need access to your camera for Augmented Reality";
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "We need your location for getting GNSS data";
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
+				INFOPLIST_KEY_UIMainStoryboardFile = Main;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.sean.ar.gnssfinder;
+				PRODUCT_NAME = SatViewAR;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		147818FA2AB86438009FCFBA /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 03F74E0235BCC1CDBED51A72 /* Pods-GnssFinder.release.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 86A2R9G9DS;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = gnssfinder/Info.plist;
+				INFOPLIST_KEY_NSCameraUsageDescription = "We need access to your camera for Augmented Reality";
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "We need your location for getting GNSS data";
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
+				INFOPLIST_KEY_UIMainStoryboardFile = Main;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.sean.ar.gnssfinder;
+				PRODUCT_NAME = SatViewAR;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		147818DF2AB86437009FCFBA /* Build configuration list for PBXProject "GnssFinder" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				147818F62AB86438009FCFBA /* Debug */,
+				147818F72AB86438009FCFBA /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		147818F82AB86438009FCFBA /* Build configuration list for PBXNativeTarget "GnssFinder" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				147818F92AB86438009FCFBA /* Debug */,
+				147818FA2AB86438009FCFBA /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 147818DC2AB86437009FCFBA /* Project object */;
+}

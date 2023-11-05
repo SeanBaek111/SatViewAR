@@ -1,0 +1,4 @@
+Target dependency graph (2 targets)
+Target 'Pods-gnssfinder' in project 'Pods'
+➜ Explicit dependency on target 'TensorFlowLiteTaskVision' in project 'Pods'
+Target 'TensorFlowLiteTaskVision' in project 'Pods' (no dependencies)

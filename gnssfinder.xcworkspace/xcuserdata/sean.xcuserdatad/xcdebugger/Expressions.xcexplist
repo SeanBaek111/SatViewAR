@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<VariablesViewState
+   version = "1.0">
+   <ContextStates>
+      <ContextState
+         contextName = "DataManager.updateSateliteStatus():DataManager.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "resultImage">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "DataManager.getResult():DataManager.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "String(format: &quot;LOS / Total: %.2f %&quot;, (nLosCnt // (nLosCnt + nNlosCnt)) ) ">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "DataManager.getClosestPt(angle:):DataManager.swift">
+      </ContextState>
+      <ContextState
+         contextName = "closure #2 in ViewController.captureScreen(_:):ViewController.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "">
+            </PersistentString>
+            <PersistentString
+               value = "DataManager.shared.resultImage">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "ViewController.showLast10(last10:):ViewController.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "last10Label">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "ViewController.viewDidLoad():ViewController.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "cameraNode.camera">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+   </ContextStates>
+</VariablesViewState>

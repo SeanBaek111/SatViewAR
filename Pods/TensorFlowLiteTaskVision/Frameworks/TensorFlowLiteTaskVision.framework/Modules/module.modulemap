@@ -1,0 +1,9 @@
+framework module TensorFlowLiteTaskVision {
+  umbrella header "TensorFlowLiteTaskVision.h"
+  export *
+  module * { export * }
+  link framework "Accelerate"
+  link framework "CoreGraphics"
+  link framework "CoreMedia"
+  link framework "CoreVideo"
+}

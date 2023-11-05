@@ -1,0 +1,12 @@
+{
+  "data" : [
+    {
+      "filename" : "lite-model_deeplabv3-mobilenetv2-ade20k_1_default_2.tflite",
+      "idiom" : "universal"
+    }
+  ],
+  "info" : {
+    "author" : "xcode",
+    "version" : 1
+  }
+}

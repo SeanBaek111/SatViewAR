@@ -37,7 +37,7 @@ Please follow these steps to contribute:
 
 ## License
 
-This project is licensed under the MIT License - see the [LICENSE.md](LICENSE) file for details.
+Licensed under the Apache License, Version 2.0 (the "[License](https://github.com/SeanBaek111/SatViewAR/blob/main/LICENSE)") 
 
 ## Contact
 

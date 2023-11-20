@@ -5,6 +5,8 @@ This iPhone application leverages AR (Augmented Reality) technology to visually 
 
 <p align="center">
 <img src="https://github.com/SeanBaek111/SatViewAR/assets/33170173/f3725f71-8993-425c-a8aa-cfd17976e8ec" width="256">
+  ![image](https://github.com/SeanBaek111/SatViewAR/assets/33170173/c24403e9-d813-45bf-ab5f-750eb66bf517)
+
 </p>
 
 

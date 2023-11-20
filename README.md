@@ -26,7 +26,7 @@ Make sure you have the latest version of Xcode installed and a valid Apple Devel
 
 ## Usage
 
-After launching the app, point your iPhone to the sky. The AR view will display satellites currently above the horizon. Satellites will be color-coded based on their NLOS status, as determined by the integrated AI model.
+After launching the app, point your iPhone to the sky. To update the display with satellites that are currently above the horizon and receivable from your location, press the 'Refresh' button. These satellites will appear as AR objects. For analysis, use the 'Measure' button. This action triggers the app to perform semantic segmentation on the satellites visible on your screen, determining their NLOS (Non-Line of Sight) status using the integrated AI model. Once you have measured all the satellites, the app will present statistics and display the satellites distinctly, color-coded based on their NLOS status.
 
 ## Contributing
 

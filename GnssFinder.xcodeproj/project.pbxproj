@@ -30,7 +30,6 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		03F74E0235BCC1CDBED51A72 /* Pods-GnssFinder.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GnssFinder.release.xcconfig"; path = "Target Support Files/Pods-GnssFinder/Pods-GnssFinder.release.xcconfig"; sourceTree = "<group>"; };
 		1417AD562ABF2B1A008EF17D /* sat3.scn */ = {isa = PBXFileReference; lastKnownFileType = file.bplist; path = sat3.scn; sourceTree = "<group>"; };
 		1417AD582ABF3959008EF17D /* earth.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = earth.jpeg; sourceTree = "<group>"; };
 		1417AD5A2ABF396E008EF17D /* space.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = space.jpeg; sourceTree = "<group>"; };
@@ -53,7 +52,8 @@
 		147818FD2AB8711A009FCFBA /* DataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataManager.swift; sourceTree = "<group>"; };
 		14DEC0902AC175FF00E3AB3A /* nlos.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = nlos.png; sourceTree = "<group>"; };
 		391607379A3915C10960E8B8 /* Pods_GnssFinder.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_GnssFinder.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		F1F4109E16320F4734685D8E /* Pods-GnssFinder.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GnssFinder.debug.xcconfig"; path = "Target Support Files/Pods-GnssFinder/Pods-GnssFinder.debug.xcconfig"; sourceTree = "<group>"; };
+		CEE1995C0D5265B609D988F5 /* Pods-GnssFinder.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GnssFinder.debug.xcconfig"; path = "Target Support Files/Pods-GnssFinder/Pods-GnssFinder.debug.xcconfig"; sourceTree = "<group>"; };
+		E5CC43E69F788F52954A8CA6 /* Pods-GnssFinder.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GnssFinder.release.xcconfig"; path = "Target Support Files/Pods-GnssFinder/Pods-GnssFinder.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -132,8 +132,8 @@
 		9C66E240B96FBC1A155DFD82 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				F1F4109E16320F4734685D8E /* Pods-GnssFinder.debug.xcconfig */,
-				03F74E0235BCC1CDBED51A72 /* Pods-GnssFinder.release.xcconfig */,
+				CEE1995C0D5265B609D988F5 /* Pods-GnssFinder.debug.xcconfig */,
+				E5CC43E69F788F52954A8CA6 /* Pods-GnssFinder.release.xcconfig */,
 			);
 			path = Pods;
 			sourceTree = "<group>";
@@ -396,7 +396,7 @@
 		};
 		147818F92AB86438009FCFBA /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = F1F4109E16320F4734685D8E /* Pods-GnssFinder.debug.xcconfig */;
+			baseConfigurationReference = CEE1995C0D5265B609D988F5 /* Pods-GnssFinder.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -430,7 +430,7 @@
 		};
 		147818FA2AB86438009FCFBA /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 03F74E0235BCC1CDBED51A72 /* Pods-GnssFinder.release.xcconfig */;
+			baseConfigurationReference = E5CC43E69F788F52954A8CA6 /* Pods-GnssFinder.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;

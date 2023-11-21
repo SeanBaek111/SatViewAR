@@ -422,7 +422,7 @@ class ViewController: UIViewController, ARSCNViewDelegate, CLLocationManagerDele
             print("Location data is not available.")
             return
         }
-        let serverUrl = "http://122.151.161.76"
+        let serverUrl = "https://gnss.seanbaek.com"
       //  serverUrl = "http://192.168.0.101:5001"
         let latitude = location.coordinate.latitude
         let longitude = location.coordinate.longitude

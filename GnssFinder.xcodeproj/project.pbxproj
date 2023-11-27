@@ -50,6 +50,7 @@
 		147818F52AB86438009FCFBA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		147818FB2AB870F7009FCFBA /* Satellite.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Satellite.swift; sourceTree = "<group>"; };
 		147818FD2AB8711A009FCFBA /* DataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataManager.swift; sourceTree = "<group>"; };
+		14B01A272B14C57E00BBE82D /* ci_pre_xcodebuild.sh */ = {isa = PBXFileReference; lastKnownFileType = text.script.sh; path = ci_pre_xcodebuild.sh; sourceTree = "<group>"; };
 		14DEC0902AC175FF00E3AB3A /* nlos.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = nlos.png; sourceTree = "<group>"; };
 		391607379A3915C10960E8B8 /* Pods_GnssFinder.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_GnssFinder.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		CEE1995C0D5265B609D988F5 /* Pods-GnssFinder.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GnssFinder.debug.xcconfig"; path = "Target Support Files/Pods-GnssFinder/Pods-GnssFinder.debug.xcconfig"; sourceTree = "<group>"; };
@@ -86,6 +87,7 @@
 		147818DB2AB86437009FCFBA = {
 			isa = PBXGroup;
 			children = (
+				14B01A262B14C53000BBE82D /* ci_scripts */,
 				147818E62AB86437009FCFBA /* gnssfinder */,
 				147818E52AB86437009FCFBA /* Products */,
 				9C66E240B96FBC1A155DFD82 /* Pods */,
@@ -119,6 +121,14 @@
 				1436D21A2AF7943C00947DFF /* UIImage_Extension.swift */,
 			);
 			path = gnssfinder;
+			sourceTree = "<group>";
+		};
+		14B01A262B14C53000BBE82D /* ci_scripts */ = {
+			isa = PBXGroup;
+			children = (
+				14B01A272B14C57E00BBE82D /* ci_pre_xcodebuild.sh */,
+			);
+			path = ci_scripts;
 			sourceTree = "<group>";
 		};
 		9B65B146373967B87215A0FC /* Frameworks */ = {
@@ -401,22 +411,23 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 2;
 				DEVELOPMENT_TEAM = 86A2R9G9DS;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = gnssfinder/Info.plist;
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.utilities";
 				INFOPLIST_KEY_NSCameraUsageDescription = "We need access to your camera for Augmented Reality";
 				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "We need your location for getting GNSS data";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = "";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = UIInterfaceOrientationPortrait;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0;
+				MARKETING_VERSION = 1.1;
 				PRODUCT_BUNDLE_IDENTIFIER = com.sean.ar.gnssfinder;
 				PRODUCT_NAME = SatViewAR;
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
@@ -424,7 +435,7 @@
 				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -435,22 +446,23 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 2;
 				DEVELOPMENT_TEAM = 86A2R9G9DS;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = gnssfinder/Info.plist;
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.utilities";
 				INFOPLIST_KEY_NSCameraUsageDescription = "We need access to your camera for Augmented Reality";
 				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "We need your location for getting GNSS data";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = "";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = UIInterfaceOrientationPortrait;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0;
+				MARKETING_VERSION = 1.1;
 				PRODUCT_BUNDLE_IDENTIFIER = com.sean.ar.gnssfinder;
 				PRODUCT_NAME = SatViewAR;
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
@@ -458,7 +470,7 @@
 				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};

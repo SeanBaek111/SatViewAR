@@ -6,15 +6,18 @@ if ! command -v bundle > /dev/null; then
   gem install --user-install bundler
 fi
 
-# Add local gems to PATH
-export PATH=$PATH:$(ruby -r rubygems -e 'puts Gem.user_dir')/bin
+# Set up local gem installation path
+export GEM_HOME=$HOME/.gem
+export PATH=$PATH:$GEM_HOME/bin
 
 # Check if CocoaPods is installed, if not install using Bundler
 if ! command -v pod > /dev/null; then
   echo "Installing CocoaPods via Bundler..."
-  bundle init
-  echo "gem 'cocoapods'" >> Gemfile
-  bundle install
+  if [ ! -f Gemfile ]; then
+    bundle init
+    echo "gem 'cocoapods'" >> Gemfile
+  fi
+  bundle install --path vendor/bundle
 fi
 
 # Install pods

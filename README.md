@@ -9,13 +9,8 @@ This iPhone application leverages AR (Augmented Reality) technology to visually 
 </p>
 
 ## Demo Video
-<iframe width="315" height="560"
-src="https://www.youtube.com/embed/IyCVtOgI_Wc?si=6clEbF0DiLzpktsF"
-title="YouTube video player"
-frameborder="0"
-allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-allowfullscreen></iframe>
- 
+[![Watch the video](https://img.youtube.com/vi/IyCVtOgI_Wc/0.jpg)](https://www.youtube.com/watch?v=IyCVtOgI_Wc)
+
 
 ## Features
 

@@ -8,6 +8,14 @@ This iPhone application leverages AR (Augmented Reality) technology to visually 
 <img src="https://github.com/SeanBaek111/SatViewAR/assets/33170173/aa57a23c-5e3f-49bd-b812-e88adddcf69f" width="256">  
 </p>
 
+## Demo Video
+<iframe width="315" height="560"
+src="https://www.youtube.com/embed/IyCVtOgI_Wc?si=6clEbF0DiLzpktsF"
+title="YouTube video player"
+frameborder="0"
+allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+allowfullscreen></iframe>
+ 
 
 ## Features
 

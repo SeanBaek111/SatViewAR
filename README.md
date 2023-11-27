@@ -9,7 +9,7 @@ This iPhone application leverages AR (Augmented Reality) technology to visually 
 </p>
 
 ## Demo Video
-[![Watch the video](https://img.youtube.com/vi/IyCVtOgI_Wc/0.jpg)](https://www.youtube.com/watch?v=IyCVtOgI_Wc)
+[Watch the video](https://www.youtube.com/watch?v=IyCVtOgI_Wc)
 
 
 ## Features

@@ -11,6 +11,8 @@ This iPhone application leverages AR (Augmented Reality) technology to visually 
 ## Demo Video
 [Watch the video](https://www.youtube.com/watch?v=IyCVtOgI_Wc)
 
+## App Download on App store
+[Apple app store](https://apps.apple.com/au/app/satviewar/id6471916876)
 
 ## Features
 

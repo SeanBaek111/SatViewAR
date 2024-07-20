@@ -14,6 +14,12 @@ import CoreMotion
 
 class ViewController: UIViewController, ARSCNViewDelegate, CLLocationManagerDelegate {
 
+    // New property for satellite selection
+    static var shared: ViewController!
+    var satelliteSelectionControl: UISegmentedControl!
+    
+    
+    // Existing properties
     var arView: ARSCNView!
     var locationManager = CLLocationManager()
     var currentLocation: CLLocation?
@@ -40,19 +46,22 @@ class ViewController: UIViewController, ARSCNViewDelegate, CLLocationManagerDele
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        // CLLocationManager 설정
+        // Set shared instance
+        ViewController.shared = self
+        
+        // CLLocationManager setting
         locationManager.delegate = self
         locationManager.requestWhenInUseAuthorization()
         locationManager.startUpdatingHeading()
         locationManager.startUpdatingLocation()
-        // ARSCNView 설정
+        // ARSCNView setting
         arView = ARSCNView(frame: self.view.frame)
         self.view.addSubview(arView)
         
-        // delegate 설정
+        // delegate setting
         arView.delegate = self
         
-        // 세션 설정
+        // sesseion
         let configuration = ARWorldTrackingConfiguration()
         configuration.worldAlignment = .gravityAndHeading
         arView.session.run(configuration)
@@ -71,7 +80,15 @@ class ViewController: UIViewController, ARSCNViewDelegate, CLLocationManagerDele
           }
         }
         
-        // headingLabel 설정
+        // Add new segment control for satellite selection
+        let segmentItems = ["All", "GPS", "GLONASS", "Galileo", "BeiDou", "SBAS"]
+        satelliteSelectionControl = UISegmentedControl(items: segmentItems)
+        satelliteSelectionControl.frame = CGRect(x: 20, y: self.view.frame.size.height - 7 * 40 - 20, width: self.view.frame.size.width - 40, height: 40)
+        satelliteSelectionControl.selectedSegmentIndex = 0
+        satelliteSelectionControl.addTarget(self, action: #selector(satelliteSelectionChanged), for: .valueChanged)
+        self.view.addSubview(satelliteSelectionControl)
+
+        // headingLabel setting
         let labelWidth: CGFloat = self.view.frame.size.width/2-20
         let labelHeight: CGFloat = 40
         let labelX: CGFloat = 20
@@ -152,7 +169,7 @@ class ViewController: UIViewController, ARSCNViewDelegate, CLLocationManagerDele
         self.view.addSubview(inferenceStatusLabel)
         
          
-        last10Label = UILabel(frame: CGRect(x: labelWidth+20, y: labelY - 6 * labelHeight, width: labelWidth, height: labelHeight*3))
+        last10Label = UILabel(frame: CGRect(x: labelWidth+20, y: labelY - 5 * labelHeight, width: labelWidth, height: labelHeight*2))
         last10Label.backgroundColor = .yellow
         last10Label.layer.opacity = 0.4
         last10Label.textColor = .black
@@ -226,6 +243,11 @@ class ViewController: UIViewController, ARSCNViewDelegate, CLLocationManagerDele
     
     }
 
+    // New function to handle satellite selection change
+    @objc func satelliteSelectionChanged() {
+       fetchGNSSData(nil)
+    }
+    
     func handleDeviceMotionUpdate(data: CMDeviceMotion) {
         let pitchDegrees = data.attitude.pitch * (180.0 / .pi)   // Tilt forward/backward in degrees
        // let rollDegrees = data.attitude.roll * (180.0 / .pi)   // Tilt left/right in degrees
@@ -259,7 +281,9 @@ class ViewController: UIViewController, ARSCNViewDelegate, CLLocationManagerDele
                self.view.bringSubviewToFront(self.refreshButton)
                self.view.bringSubviewToFront(self.last10Label)
                self.view.bringSubviewToFront(self.resultLabel)
-                self.view.bringSubviewToFront(self.refreshTimeLabel)
+            self.view.bringSubviewToFront(self.refreshTimeLabel)
+            self.view.bringSubviewToFront(self.satelliteSelectionControl)
+            
             //    self.view.bringSubviewToFront(self.satellitesStatusLabel)
                 
                UIView.animate(withDuration: 0.5, animations: {
@@ -364,19 +388,23 @@ class ViewController: UIViewController, ARSCNViewDelegate, CLLocationManagerDele
         }
         last10Label.text = labelText
         last10Label.isHidden = false
-       
+        
         let labelHeight: CGFloat = 24
         
-//        let diff:CGFloat = abs(last10LabelHeight - labelHeight * CGFloat(cnt))
-//        print("diff ",diff)
-        if cnt < 5 {
-            let h1 = last10Label.frame.size.height
-            last10Label.frame.size.height = labelHeight * CGFloat(cnt)
-            let h2 = last10Label.frame.size.height
-            let diff = h1 - h2
-            last10Label.frame.origin.y += diff
-            
+        //        let diff:CGFloat = abs(last10LabelHeight - labelHeight * CGFloat(cnt))
+        //        print("diff ",diff)
+        //if cnt < 5
+        
+        if cnt > 3{
+            cnt = 3
         }
+        let h1 = last10Label.frame.size.height
+        last10Label.frame.size.height = labelHeight * CGFloat(cnt)
+        let h2 = last10Label.frame.size.height
+        let diff = h1 - h2
+        last10Label.frame.origin.y += diff
+        
+        
     }
 
     
@@ -399,7 +427,7 @@ class ViewController: UIViewController, ARSCNViewDelegate, CLLocationManagerDele
             }
         }
 
-    @IBAction func fetchGNSSData(_ sender: UIButton) {
+    @IBAction func fetchGNSSData(_ sender: UIButton?) {
         var satellitesStatus = ""
         DispatchQueue.main.async {
             let generator = UIImpactFeedbackGenerator(style: .medium)
@@ -432,7 +460,27 @@ class ViewController: UIViewController, ARSCNViewDelegate, CLLocationManagerDele
         satellitesStatus = "Longitude:" + String(format:"%.3f\n" , longitude) +
                             "Latitude:" + String(format:"%.3f\n" , latitude) +
                             "Altitude:" + String(format:"%.3f\n----------------------------\n" , altitude)
-        let urlString = serverUrl+"/gnss?latitude=\(latitude)&longitude=\(longitude)&altitude=\(altitude)&group=\(group)&reload=true"
+        
+        // Set group based on selected satellite system
+        let selectedSystem: String
+        switch satelliteSelectionControl.selectedSegmentIndex {
+        case 1:
+            selectedSystem = "GPS-OPS"
+        case 2:
+            selectedSystem = "glo-ops"
+        case 3:
+            selectedSystem = "galileo"
+        case 4:
+            selectedSystem = "beidou" 
+        case 5:
+            selectedSystem = "sbas"
+        default:
+            selectedSystem = "all"
+        }
+
+        let urlString = serverUrl+"/gnss?latitude=\(latitude)&longitude=\(longitude)&altitude=\(altitude)&group=\(selectedSystem)&reload=true"
+
+
         if let url = URL(string: urlString) {
             let task = URLSession.shared.dataTask(with: url) { data, response, error in
                 if let error = error {

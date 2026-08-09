@@ -1,0 +1,15 @@
+{
+  "originHash" : "db4d3b88ad2612c06beba8b27b27c54ff7c3a83a7cb6ce8bc98832fb0e430fe1",
+  "pins" : [
+    {
+      "identity" : "satellitekit",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/gavineadie/SatelliteKit.git",
+      "state" : {
+        "revision" : "9a87cdb80344f26e81bc5fc82fdf9a3350478603",
+        "version" : "2.1.2"
+      }
+    }
+  ],
+  "version" : 3
+}

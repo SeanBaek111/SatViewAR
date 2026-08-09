@@ -10,6 +10,7 @@ import CoreLocation
 import SceneKit
 import TensorFlowLiteTaskVision
 import CoreMotion
+import SatViewAROrbit
 
 
 class ViewController: UIViewController, ARSCNViewDelegate, CLLocationManagerDelegate {
@@ -43,6 +44,8 @@ class ViewController: UIViewController, ARSCNViewDelegate, CLLocationManagerDele
     /// Image segmentator instance that runs image segmentation.
     private var imageSegmentationHelper: ImageSegmentationHelper?
     let motionManager = CMMotionManager()
+    private let satelliteProvider = LocalSatelliteProvider()
+    private var initialSatelliteLoadGate = InitialSatelliteLoadGate()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -422,107 +425,80 @@ class ViewController: UIViewController, ARSCNViewDelegate, CLLocationManagerDele
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
             if let location = locations.last {
                 currentLocation = location
-              
                 locationManager.stopUpdatingLocation()
+                if initialSatelliteLoadGate.shouldRequestLoad() {
+                    fetchGNSSData(nil)
+                }
             }
         }
 
     @IBAction func fetchGNSSData(_ sender: UIButton?) {
-        var satellitesStatus = ""
-        DispatchQueue.main.async {
-            let generator = UIImpactFeedbackGenerator(style: .medium)
-            generator.impactOccurred()
-            self.losLabal.text = " LOS: -"
-            self.nlosLabel.text = " NLOS: -"
-            self.scrollView.isHidden = false
-            self.satelliteCountLabel.text = "Loading..."
-           // self.satellitesStatusLabel.isHidden = false
-           // self.view.bringSubviewToFront(self.scrollView)
-           // self.view.bringSubviewToFront(self.satellitesStatusLabel)
-            
-          
-        }
+        let generator = UIImpactFeedbackGenerator(style: .medium)
+        generator.impactOccurred()
+        losLabal.text = " LOS: -"
+        nlosLabel.text = " NLOS: -"
+        scrollView.isHidden = false
+        satelliteCountLabel.text = "Loading..."
         last10Label.isHidden = true
         resultLabel.isHidden = true
         locationManager.startUpdatingLocation()
 
         guard let location = currentLocation else {
-            print("Location data is not available.")
+            satelliteCountLabel.text = " Location unavailable"
             return
         }
-        let serverUrl = "https://gnss.seanbaek.com"
-      //  serverUrl = "http://192.168.0.101:5001"
-        let latitude = location.coordinate.latitude
-        let longitude = location.coordinate.longitude
-        let altitude = location.altitude
-        let group = "all"
-        print("LOC :",latitude, longitude, altitude)
-        satellitesStatus = "Longitude:" + String(format:"%.3f\n" , longitude) +
-                            "Latitude:" + String(format:"%.3f\n" , latitude) +
-                            "Altitude:" + String(format:"%.3f\n----------------------------\n" , altitude)
-        
-        // Set group based on selected satellite system
-        let selectedSystem: String
+
+        let selectedConstellation: GNSSConstellation
         switch satelliteSelectionControl.selectedSegmentIndex {
         case 1:
-            selectedSystem = "GPS-OPS"
+            selectedConstellation = .gps
         case 2:
-            selectedSystem = "glo-ops"
+            selectedConstellation = .glonass
         case 3:
-            selectedSystem = "galileo"
+            selectedConstellation = .galileo
         case 4:
-            selectedSystem = "beidou" 
+            selectedConstellation = .beidou
         case 5:
-            selectedSystem = "sbas"
+            selectedConstellation = .sbas
         default:
-            selectedSystem = "all"
+            selectedConstellation = .all
         }
 
-        let urlString = serverUrl+"/gnss?latitude=\(latitude)&longitude=\(longitude)&altitude=\(altitude)&group=\(selectedSystem)&reload=true"
+        let observer = ObserverLocation(
+            latitude: location.coordinate.latitude,
+            longitude: location.coordinate.longitude,
+            altitudeMeters: location.altitude
+        )
+        let requestedAt = Date()
 
-
-        if let url = URL(string: urlString) {
-            let task = URLSession.shared.dataTask(with: url) { data, response, error in
-                if let error = error {
-                    print("Error fetching data: \(error)")
-                    return
-                }
-                
-                if let data = data {
-                    let parsedSatellites = DataManager.shared.parseSatellites(from: data)
-                    self.placeSatellites(parsedSatellites)
-                    
-                    
-                    DispatchQueue.main.async {
-                        self.satelliteCountLabel.text = " Total Satellites: \(parsedSatellites.count)"
-                        self.unCheckedCountLabel.text = " Unchecked: \(DataManager.shared.getUnCheckedCount())"
-                        
-                        for sat in parsedSatellites{
-                            satellitesStatus +=  sat.getSatelliteInfo()
-                        }
-                            //  self.satellitesStatusLabel.text = satellitesStatus
-                    }
+        Task { [weak self] in
+            guard let self else { return }
+            do {
+                let visibleSatellites = try await satelliteProvider.visibleSatellites(
+                    selection: selectedConstellation,
+                    observer: observer,
+                    at: requestedAt
+                )
+                let satellites = visibleSatellites.map {
+                    Satellite(
+                        name: $0.name,
+                        azimuth: $0.azimuth,
+                        elevation: $0.elevation
+                    )
                 }
 
+                DataManager.shared.satellites = satellites
+                placeSatellites(satellites)
+                satelliteCountLabel.text = " Total Satellites: \(satellites.count)"
+                unCheckedCountLabel.text = " Unchecked: \(DataManager.shared.getUnCheckedCount())"
+
+                let formatter = DateFormatter()
+                formatter.dateFormat = "HH:mm"
+                refreshTimeLabel.text = " Last Updated: \(formatter.string(from: requestedAt))"
+            } catch {
+                satelliteCountLabel.text = " Satellite data unavailable"
             }
-            task.resume()
-            // Get the current date and time
-            let currentDate = Date()
-
-            // Create a date formatter
-            let formatter = DateFormatter()
-
-            // Set the desired format
-            formatter.dateFormat = "HH:mm"
-
-            // Convert the date to the desired format
-            let timestamp = formatter.string(from: currentDate)
-
-            // Set the text of the label
-            self.refreshTimeLabel.text = " Last Updated: \(timestamp)"
         }
-        
-        
     }
      
 

@@ -26,6 +26,7 @@
 		147818FC2AB870F8009FCFBA /* Satellite.swift in Sources */ = {isa = PBXBuildFile; fileRef = 147818FB2AB870F7009FCFBA /* Satellite.swift */; };
 		147818FE2AB8711A009FCFBA /* DataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 147818FD2AB8711A009FCFBA /* DataManager.swift */; };
 		14DEC0912AC175FF00E3AB3A /* nlos.png in Resources */ = {isa = PBXBuildFile; fileRef = 14DEC0902AC175FF00E3AB3A /* nlos.png */; };
+		A1B2C3D4E5F6000000000001 /* SatViewAROrbit in Frameworks */ = {isa = PBXBuildFile; productRef = A1B2C3D4E5F6000000000003 /* SatViewAROrbit */; };
 		BD656443077FF1FF9D873A01 /* Pods_GnssFinder.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 391607379A3915C10960E8B8 /* Pods_GnssFinder.framework */; };
 /* End PBXBuildFile section */
 
@@ -62,6 +63,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A1B2C3D4E5F6000000000001 /* SatViewAROrbit in Frameworks */,
 				BD656443077FF1FF9D873A01 /* Pods_GnssFinder.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -165,6 +167,9 @@
 			dependencies = (
 			);
 			name = GnssFinder;
+			packageProductDependencies = (
+				A1B2C3D4E5F6000000000003 /* SatViewAROrbit */,
+			);
 			productName = gnssfinder;
 			productReference = 147818E42AB86437009FCFBA /* SatViewAR.app */;
 			productType = "com.apple.product-type.application";
@@ -193,6 +198,9 @@
 				Base,
 			);
 			mainGroup = 147818DB2AB86437009FCFBA;
+			packageReferences = (
+				A1B2C3D4E5F6000000000002 /* XCLocalSwiftPackageReference "." */,
+			);
 			productRefGroup = 147818E52AB86437009FCFBA /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -284,6 +292,21 @@
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
+
+/* Begin XCLocalSwiftPackageReference section */
+		A1B2C3D4E5F6000000000002 /* XCLocalSwiftPackageReference "." */ = {
+			isa = XCLocalSwiftPackageReference;
+			relativePath = ".";
+		};
+/* End XCLocalSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		A1B2C3D4E5F6000000000003 /* SatViewAROrbit */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = A1B2C3D4E5F6000000000002 /* XCLocalSwiftPackageReference "." */;
+			productName = SatViewAROrbit;
+		};
+/* End XCSwiftPackageProductDependency section */
 
 /* Begin XCBuildConfiguration section */
 		147818F62AB86438009FCFBA /* Debug */ = {

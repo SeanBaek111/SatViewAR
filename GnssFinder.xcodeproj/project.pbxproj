@@ -22,14 +22,14 @@
 		147818FC2AB870F8009FCFBA /* Satellite.swift in Sources */ = {isa = PBXBuildFile; fileRef = 147818FB2AB870F7009FCFBA /* Satellite.swift */; };
 		147818FE2AB8711A009FCFBA /* DataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 147818FD2AB8711A009FCFBA /* DataManager.swift */; };
 		14DEC0912AC175FF00E3AB3A /* nlos.png in Resources */ = {isa = PBXBuildFile; fileRef = 14DEC0902AC175FF00E3AB3A /* nlos.png */; };
-		A1B2C3D4E5F6000000000001 /* SatViewAROrbit in Frameworks */ = {isa = PBXBuildFile; productRef = A1B2C3D4E5F6000000000003 /* SatViewAROrbit */; };
-		BD656443077FF1FF9D873A01 /* Pods_GnssFinder.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 391607379A3915C10960E8B8 /* Pods_GnssFinder.framework */; };
 		27229F5A2553406AB0569C73 /* SkySegmenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BA6C35D70E84F5898333D52 /* SkySegmenter.swift */; };
 		6D8211BAEC774B5BBED066D7 /* SkyMaskRenderer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 020975F7282646EF88F40F14 /* SkyMaskRenderer.swift */; };
+		A1B2C3D4E5F6000000000001 /* SatViewAROrbit in Frameworks */ = {isa = PBXBuildFile; productRef = A1B2C3D4E5F6000000000003 /* SatViewAROrbit */; };
 		A42686DC5BB24DA4B06190C9 /* SkySeg_large_256_trained.mlpackage in Sources */ = {isa = PBXBuildFile; fileRef = 62A111C64EE54AECBA57EEEB /* SkySeg_large_256_trained.mlpackage */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		020975F7282646EF88F40F14 /* SkyMaskRenderer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SkyMaskRenderer.swift; sourceTree = "<group>"; };
 		1417AD562ABF2B1A008EF17D /* sat3.scn */ = {isa = PBXFileReference; lastKnownFileType = file.bplist; path = sat3.scn; sourceTree = "<group>"; };
 		1417AD582ABF3959008EF17D /* earth.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = earth.jpeg; sourceTree = "<group>"; };
 		1417AD5A2ABF396E008EF17D /* space.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = space.jpeg; sourceTree = "<group>"; };
@@ -48,11 +48,7 @@
 		147818FD2AB8711A009FCFBA /* DataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataManager.swift; sourceTree = "<group>"; };
 		14B01A272B14C57E00BBE82D /* ci_pre_xcodebuild.sh */ = {isa = PBXFileReference; lastKnownFileType = text.script.sh; path = ci_pre_xcodebuild.sh; sourceTree = "<group>"; };
 		14DEC0902AC175FF00E3AB3A /* nlos.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = nlos.png; sourceTree = "<group>"; };
-		391607379A3915C10960E8B8 /* Pods_GnssFinder.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_GnssFinder.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		CEE1995C0D5265B609D988F5 /* Pods-GnssFinder.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GnssFinder.debug.xcconfig"; path = "Target Support Files/Pods-GnssFinder/Pods-GnssFinder.debug.xcconfig"; sourceTree = "<group>"; };
-		E5CC43E69F788F52954A8CA6 /* Pods-GnssFinder.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GnssFinder.release.xcconfig"; path = "Target Support Files/Pods-GnssFinder/Pods-GnssFinder.release.xcconfig"; sourceTree = "<group>"; };
 		5BA6C35D70E84F5898333D52 /* SkySegmenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SkySegmenter.swift; sourceTree = "<group>"; };
-		020975F7282646EF88F40F14 /* SkyMaskRenderer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SkyMaskRenderer.swift; sourceTree = "<group>"; };
 		62A111C64EE54AECBA57EEEB /* SkySeg_large_256_trained.mlpackage */ = {isa = PBXFileReference; lastKnownFileType = folder.mlpackage; path = SkySeg_large_256_trained.mlpackage; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -62,7 +58,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				A1B2C3D4E5F6000000000001 /* SatViewAROrbit in Frameworks */,
-				BD656443077FF1FF9D873A01 /* Pods_GnssFinder.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -90,7 +85,6 @@
 				147818E62AB86437009FCFBA /* gnssfinder */,
 				147818E52AB86437009FCFBA /* Products */,
 				9C66E240B96FBC1A155DFD82 /* Pods */,
-				9B65B146373967B87215A0FC /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -130,19 +124,9 @@
 			path = ci_scripts;
 			sourceTree = "<group>";
 		};
-		9B65B146373967B87215A0FC /* Frameworks */ = {
-			isa = PBXGroup;
-			children = (
-				391607379A3915C10960E8B8 /* Pods_GnssFinder.framework */,
-			);
-			name = Frameworks;
-			sourceTree = "<group>";
-		};
 		9C66E240B96FBC1A155DFD82 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				CEE1995C0D5265B609D988F5 /* Pods-GnssFinder.debug.xcconfig */,
-				E5CC43E69F788F52954A8CA6 /* Pods-GnssFinder.release.xcconfig */,
 			);
 			path = Pods;
 			sourceTree = "<group>";
@@ -154,7 +138,6 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 147818F82AB86438009FCFBA /* Build configuration list for PBXNativeTarget "GnssFinder" */;
 			buildPhases = (
-				B4597355C7D4A4F1E05B8AE5 /* [CP] Check Pods Manifest.lock */,
 				147818E02AB86437009FCFBA /* Sources */,
 				147818E12AB86437009FCFBA /* Frameworks */,
 				147818E22AB86437009FCFBA /* Resources */,
@@ -225,31 +208,6 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
-/* Begin PBXShellScriptBuildPhase section */
-		B4597355C7D4A4F1E05B8AE5 /* [CP] Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
-				"${PODS_ROOT}/Manifest.lock",
-			);
-			name = "[CP] Check Pods Manifest.lock";
-			outputFileListPaths = (
-			);
-			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-GnssFinder-checkManifestLockResult.txt",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
-			showEnvVarsInLog = 0;
-		};
-/* End PBXShellScriptBuildPhase section */
-
 /* Begin PBXSourcesBuildPhase section */
 		147818E02AB86437009FCFBA /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
@@ -288,21 +246,6 @@
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
-
-/* Begin XCLocalSwiftPackageReference section */
-		A1B2C3D4E5F6000000000002 /* XCLocalSwiftPackageReference "." */ = {
-			isa = XCLocalSwiftPackageReference;
-			relativePath = ".";
-		};
-/* End XCLocalSwiftPackageReference section */
-
-/* Begin XCSwiftPackageProductDependency section */
-		A1B2C3D4E5F6000000000003 /* SatViewAROrbit */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = A1B2C3D4E5F6000000000002 /* XCLocalSwiftPackageReference "." */;
-			productName = SatViewAROrbit;
-		};
-/* End XCSwiftPackageProductDependency section */
 
 /* Begin XCBuildConfiguration section */
 		147818F62AB86438009FCFBA /* Debug */ = {
@@ -425,12 +368,11 @@
 		};
 		147818F92AB86438009FCFBA /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = CEE1995C0D5265B609D988F5 /* Pods-GnssFinder.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 4;
+				CURRENT_PROJECT_VERSION = 5;
 				DEVELOPMENT_TEAM = 86A2R9G9DS;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = gnssfinder/Info.plist;
@@ -446,7 +388,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.4;
+				MARKETING_VERSION = 1.5;
 				PRODUCT_BUNDLE_IDENTIFIER = com.sean.ar.gnssfinder;
 				PRODUCT_NAME = SatViewAR;
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
@@ -460,12 +402,11 @@
 		};
 		147818FA2AB86438009FCFBA /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = E5CC43E69F788F52954A8CA6 /* Pods-GnssFinder.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 4;
+				CURRENT_PROJECT_VERSION = 5;
 				DEVELOPMENT_TEAM = 86A2R9G9DS;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = gnssfinder/Info.plist;
@@ -481,7 +422,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.4;
+				MARKETING_VERSION = 1.5;
 				PRODUCT_BUNDLE_IDENTIFIER = com.sean.ar.gnssfinder;
 				PRODUCT_NAME = SatViewAR;
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
@@ -515,6 +456,21 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCLocalSwiftPackageReference section */
+		A1B2C3D4E5F6000000000002 /* XCLocalSwiftPackageReference "." */ = {
+			isa = XCLocalSwiftPackageReference;
+			relativePath = .;
+		};
+/* End XCLocalSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		A1B2C3D4E5F6000000000003 /* SatViewAROrbit */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = A1B2C3D4E5F6000000000002 /* XCLocalSwiftPackageReference "." */;
+			productName = SatViewAROrbit;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 147818DC2AB86437009FCFBA /* Project object */;
 }

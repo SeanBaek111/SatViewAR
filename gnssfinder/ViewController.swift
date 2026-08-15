@@ -12,7 +12,7 @@ import CoreMotion
 import SatViewAROrbit
 
 
-class ViewController: UIViewController, ARSCNViewDelegate, CLLocationManagerDelegate {
+class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, CLLocationManagerDelegate {
 
     // New property for satellite selection
     static var shared: ViewController!
@@ -42,6 +42,10 @@ class ViewController: UIViewController, ARSCNViewDelegate, CLLocationManagerDele
     private var skySegmenter: SkySegmenter?
     /// Keeps inference and mask rendering off the main thread.
     private let segmentationQueue = DispatchQueue(label: "com.sean.ar.gnssfinder.segmentation")
+    /// True while the app keeps judging every incoming camera frame.
+    private var isScanning = false
+    /// Set while a frame is in flight so new frames are dropped instead of queued.
+    private var isSegmenting = false
     let motionManager = CMMotionManager()
     private let satelliteProvider = LocalSatelliteProvider()
     private var initialSatelliteLoadGate = InitialSatelliteLoadGate()
@@ -62,7 +66,9 @@ class ViewController: UIViewController, ARSCNViewDelegate, CLLocationManagerDele
         
         // delegate setting
         arView.delegate = self
-        
+        // Camera frames arrive here so scanning can run continuously.
+        arView.session.delegate = self
+
         // sesseion
         let configuration = ARWorldTrackingConfiguration()
         configuration.worldAlignment = .gravityAndHeading
@@ -318,24 +324,48 @@ class ViewController: UIViewController, ARSCNViewDelegate, CLLocationManagerDele
     }
 
    
+    /// Starts and stops continuous scanning.
+    ///
+    /// The old flow judged a single frame per tap, which meant only the satellites that
+    /// happened to be on screen at that instant were ever classified. Core ML runs fast
+    /// enough to segment every frame, so the button now starts a scan and the user simply
+    /// turns around. Each satellite is judged as it comes into view, and the scan stops
+    /// on its own once nothing is left unchecked.
     @objc func captureScreen(_ sender: UIButton) {
+        if isScanning {
+            stopScanning(reason: " Scan stopped")
+            return
+        }
+
+        guard skySegmenter != nil else {
+            inferenceStatusLabel.text = " ERROR: sky model is not ready."
+            return
+        }
+
+        isScanning = true
+        testButton.setTitle("Stop", for: .normal)
+        clearResults()
+        DataManager.shared.showSatellites()
+    }
+
+    private func stopScanning(reason: String) {
+        isScanning = false
+        testButton.setTitle("Measure", for: .normal)
+        inferenceStatusLabel.text = reason
+    }
+
+    /// Segments one camera frame and folds the result into the LOS bookkeeping.
+    private func processFrame(_ frame: ARFrame) {
         // The previous implementation rendered the whole AR view with arView.snapshot(),
         // which meant the satellite markers ended up inside the image being segmented.
         // Hiding every satellite node before the capture and restoring them afterwards
         // was a workaround for that. Reading the raw camera buffer removes the problem,
         // so the hide/restore dance is gone.
-        guard let frame = arView.session.currentFrame else {
-            inferenceStatusLabel.text = " No camera frame yet"
-            return
-        }
-
         guard let segmenter = skySegmenter else {
-            inferenceStatusLabel.text = " ERROR: sky model is not ready."
             return
         }
 
-        clearResults()
-        DataManager.shared.showSatellites()
+        isSegmenting = true
         updateSatellitesPosition()
 
         let viewportSize = arView.bounds.size
@@ -363,13 +393,26 @@ class ViewController: UIViewController, ARSCNViewDelegate, CLLocationManagerDele
 
                 DispatchQueue.main.async {
                     self.applySegmentation(image: image, milliseconds: output.inferenceMilliseconds)
+                    self.isSegmenting = false
                 }
             } catch {
                 DispatchQueue.main.async {
                     self.inferenceStatusLabel.text = " Segmentation failed: \(error)"
+                    self.isSegmenting = false
                 }
             }
         }
+    }
+
+    // MARK: - ARSessionDelegate
+
+    func session(_ session: ARSession, didUpdate frame: ARFrame) {
+        guard isScanning, !isSegmenting else {
+            // Dropping frames while one is in flight keeps the overlay in step with the
+            // camera. Queueing them would only add latency.
+            return
+        }
+        processFrame(frame)
     }
 
     /// Feeds the finished mask into the existing LOS bookkeeping.
@@ -394,6 +437,10 @@ class ViewController: UIViewController, ARSCNViewDelegate, CLLocationManagerDele
             last10Label.isHidden = true
             resultLabel.isHidden = false
             resultLabel.text = DataManager.shared.getResult()
+            // Everything on the sky has been classified, so there is nothing left to scan.
+            if isScanning {
+                stopScanning(reason: " Elapsed Time: \(Int(milliseconds)) ms")
+            }
         } else {
             unCheckedCountLabel.text = " Unchecked: \(unCheckedCount)"
         }

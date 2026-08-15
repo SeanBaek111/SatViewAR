@@ -8,7 +8,6 @@ import UIKit
 import ARKit
 import CoreLocation
 import SceneKit
-import TensorFlowLiteTaskVision
 import CoreMotion
 import SatViewAROrbit
 
@@ -39,10 +38,10 @@ class ViewController: UIViewController, ARSCNViewDelegate, CLLocationManagerDele
     var resultLabel: UILabel!
     var testButton: UIButton!
     var refreshButton: UIButton!
-    /// Target image to run image segmentation on.
-    private var targetImage: UIImage?
-    /// Image segmentator instance that runs image segmentation.
-    private var imageSegmentationHelper: ImageSegmentationHelper?
+    /// Sky segmentation model. Replaces the previous TensorFlow Lite ADE20K segmenter.
+    private var skySegmenter: SkySegmenter?
+    /// Keeps inference and mask rendering off the main thread.
+    private let segmentationQueue = DispatchQueue(label: "com.sean.ar.gnssfinder.segmentation")
     let motionManager = CMMotionManager()
     private let satelliteProvider = LocalSatelliteProvider()
     private var initialSatelliteLoadGate = InitialSatelliteLoadGate()
@@ -69,18 +68,13 @@ class ViewController: UIViewController, ARSCNViewDelegate, CLLocationManagerDele
         configuration.worldAlignment = .gravityAndHeading
         arView.session.run(configuration)
         
-        // Initialize an image segmentator instance.
-        ImageSegmentationHelper.newInstance { result in
-          switch result {
-          case let .success(segmentationHelper):
-            // Store the initialized instance for use.
-            self.imageSegmentationHelper = segmentationHelper
-
-            // Run image segmentation on a demo image.
-             
-          case .failure(_):
-            print("Failed to initialize.")
-          }
+        // Initialize the sky segmentation model.
+        // Core ML loads fast enough to do this inline, unlike the previous TFLite path
+        // which needed a background queue and a completion handler.
+        do {
+            skySegmenter = try SkySegmenter()
+        } catch {
+            print("Failed to load sky segmentation model: \(error)")
         }
         
         // Add new segment control for satellite selection
@@ -325,24 +319,91 @@ class ViewController: UIViewController, ARSCNViewDelegate, CLLocationManagerDele
 
    
     @objc func captureScreen(_ sender: UIButton) {
-//        DispatchQueue.main.async {
-//            self.satellitesStatusLabel.text = "Loading..."
-//           }
-        // hide all satellite objects
-        arView.scene.rootNode.enumerateChildNodes { (node, _) in
-            if node.name == "satellite" {
-                node.isHidden = true
+        // The previous implementation rendered the whole AR view with arView.snapshot(),
+        // which meant the satellite markers ended up inside the image being segmented.
+        // Hiding every satellite node before the capture and restoring them afterwards
+        // was a workaround for that. Reading the raw camera buffer removes the problem,
+        // so the hide/restore dance is gone.
+        guard let frame = arView.session.currentFrame else {
+            inferenceStatusLabel.text = " No camera frame yet"
+            return
+        }
+
+        guard let segmenter = skySegmenter else {
+            inferenceStatusLabel.text = " ERROR: sky model is not ready."
+            return
+        }
+
+        clearResults()
+        DataManager.shared.showSatellites()
+        updateSatellitesPosition()
+
+        let viewportSize = arView.bounds.size
+        let scale = UIScreen.main.scale
+        let orientation = view.window?.windowScene?.interfaceOrientation ?? .portrait
+
+        segmentationQueue.async { [weak self] in
+            guard let self = self else {
+                return
+            }
+
+            do {
+                // capturedImage is in the sensor's native landscape orientation.
+                // The app is portrait, so the buffer is rotated by .right.
+                let output = try segmenter.segment(
+                    pixelBuffer: frame.capturedImage, orientation: .right
+                )
+                let image = SkyMaskRenderer.viewSpaceImage(
+                    mask: output.mask,
+                    frame: frame,
+                    viewportSize: viewportSize,
+                    scale: scale,
+                    orientation: orientation
+                )
+
+                DispatchQueue.main.async {
+                    self.applySegmentation(image: image, milliseconds: output.inferenceMilliseconds)
+                }
+            } catch {
+                DispatchQueue.main.async {
+                    self.inferenceStatusLabel.text = " Segmentation failed: \(error)"
+                }
             }
         }
-        
-        // capture screen
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.01) {
-            let screenshotImage = self.arView.snapshot()
- 
-            DataManager.shared.showSatellites()
-            self.updateSatellitesPosition()
-            self.runSegmentation(screenshotImage)
-            
+    }
+
+    /// Feeds the finished mask into the existing LOS bookkeeping.
+    ///
+    /// DataManager reads the red channel of this image at each satellite's screen position,
+    /// so keeping that contract means DataManager and isLOS stay untouched.
+    private func applySegmentation(image: UIImage?, milliseconds: Double) {
+        guard let image = image else {
+            inferenceStatusLabel.text = " Segmentation produced no mask"
+            return
+        }
+
+        DataManager.shared.resultImage = image
+        overlayDataManagerImage()
+        DataManager.shared.updateSateliteStatus()
+
+        inferenceStatusLabel.text = " Elapsed Time: \(Int(milliseconds)) ms"
+
+        let unCheckedCount = DataManager.shared.getUnCheckedCount()
+        if unCheckedCount == 0 {
+            unCheckedCountLabel.text = "COMPLETED"
+            last10Label.isHidden = true
+            resultLabel.isHidden = false
+            resultLabel.text = DataManager.shared.getResult()
+        } else {
+            unCheckedCountLabel.text = " Unchecked: \(unCheckedCount)"
+        }
+
+        losLabal.text = " LOS: \(DataManager.shared.getLosCount())"
+        nlosLabel.text = " NLOS: \(DataManager.shared.getNlosCount())"
+
+        let last10 = DataManager.shared.getLast10()
+        if last10.count > 0 {
+            showLast10(last10: last10)
         }
     }
     
@@ -641,129 +702,9 @@ extension ViewController {
     }
 }
 extension ViewController {
-  /// Run image segmentation on the given image, and show result on screen.
-  ///  - Parameter image: The target image for segmentation.
-  func runSegmentation(_ image: UIImage) {
-    clearResults()
-    // Cache the original image
-      let originalSize = image.size
-
-      // Resize the image to 513x513
-      let newSize = CGSize(width: 513, height: 513)
-      UIGraphicsBeginImageContextWithOptions(newSize, false, 0.0)
-      image.draw(in: CGRect(origin: CGPoint.zero, size: newSize))
-      let resizedImage = UIGraphicsGetImageFromCurrentImageContext()
-      UIGraphicsEndImageContext()
-
-      // Use the resized image for further processing
-      guard let targetImage = resizedImage?.transformOrientationToUp() else {
-        inferenceStatusLabel.text = "ERROR: Image orientation couldn't be fixed."
-        return
-      }
-
-   
-    // Make sure that image segmentator is initialized.
-    guard let imageSegmentator = imageSegmentationHelper else {
-      inferenceStatusLabel.text = "ERROR: Image Segmentator is not ready."
-      return
-    }
-
-    // Cache the target image.
-    self.targetImage = targetImage
- 
-     let inputImage =  targetImage
-        
-    // Run image segmentation.
-    imageSegmentator.runSegmentation(
-      inputImage,
-      completion: { result in
- 
-        // Show the segmentation result on screen
-        switch result {
-        case let .success(segmentationResult):
-    
-          // Show result metadata
-          self.showInferenceTime(segmentationResult)
-          self.showClassLegend(segmentationResult)
-            print(segmentationResult.resultImage.size)
-            
-            let resizedResultImage = segmentationResult.resultImage.resized(to: originalSize)
-            //bsh
-            print(resizedResultImage.size)
-            
-            
-            DispatchQueue.main.async {
-                DataManager.shared.resultImage = resizedResultImage
-                self.overlayDataManagerImage()
-                DataManager.shared.updateSateliteStatus()
-                let nUnCheckedCnt:Int = DataManager.shared.getUnCheckedCount()
-                if nUnCheckedCnt == 0{
-                    self.unCheckedCountLabel.text = "COMPLETED"
-                    self.last10Label.isHidden = true
-                    
-                    self.resultLabel.isHidden = false
-                    self.resultLabel.text = DataManager.shared.getResult()
-                }
-                else{
-                    self.unCheckedCountLabel.text = " Unchecked: \(nUnCheckedCnt)"
-                }
-               
-                self.losLabal.text = " LOS: \(DataManager.shared.getLosCount())"
-                self.nlosLabel.text = " NLOS: \(DataManager.shared.getNlosCount())"
-            
-             
-                let listLast10: [Satellite] = DataManager.shared.getLast10()
-             //   print("list10 cnt ", listLast10.count)
-                if  listLast10.count > 0 {
-                    self.showLast10(last10: listLast10)
-                }
-           
-               
-            
-          }
-            
-           
-        case let .failure(error):
-          self.inferenceStatusLabel.text = error.localizedDescription
-        }
-      })
-  }
 
   /// Clear result from previous run to prepare for new segmentation run.
-  private func clearResults() {
+  func clearResults() {
     inferenceStatusLabel.text = " Running.."
   }
-
-  /// Show segmentation latency on screen.
-  private func showInferenceTime(_ segmentationResult: ImageSegmentationResult) {
-    let timeString =
-      " Elapsed Time: \(Int(segmentationResult.inferenceTime * 1000))ms"
-
-    inferenceStatusLabel.text = timeString
-  }
-
-  /// Show color legend of each class found in the image.
-  private func showClassLegend(_ segmentationResult: ImageSegmentationResult) {
-    let legendText = NSMutableAttributedString()
-
-    // Loop through the classes founded in the image.
-    segmentationResult.colorLegend.forEach { (className, color) in
-      // If the color legend is light, use black text font. If not, use white text font.
-      let textColor = color.isLight() ?? true ? UIColor.black : UIColor.white
-
-      // Construct the legend text for current class.
-      let attributes = [
-        NSAttributedString.Key.font: UIFont.preferredFont(forTextStyle: .headline),
-        NSAttributedString.Key.backgroundColor: color,
-        NSAttributedString.Key.foregroundColor: textColor,
-      ]
-      let string = NSAttributedString(string: " \(className) ", attributes: attributes)
-
-      // Add class legend to string to show on the screen.
-      legendText.append(string)
-      legendText.append(NSAttributedString(string: "  "))
-    }
- 
-  }
 }
- 

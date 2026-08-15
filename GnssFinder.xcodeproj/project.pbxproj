@@ -10,12 +10,8 @@
 		1417AD572ABF2B1A008EF17D /* sat3.scn in Resources */ = {isa = PBXBuildFile; fileRef = 1417AD562ABF2B1A008EF17D /* sat3.scn */; };
 		1417AD592ABF3959008EF17D /* earth.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = 1417AD582ABF3959008EF17D /* earth.jpeg */; };
 		1417AD5B2ABF396E008EF17D /* space.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = 1417AD5A2ABF396E008EF17D /* space.jpeg */; };
-		1436D2102AF78C0800947DFF /* sky_model_meta.tflite in Resources */ = {isa = PBXBuildFile; fileRef = 1436D20F2AF78C0800947DFF /* sky_model_meta.tflite */; };
-		1436D2122AF78CC100947DFF /* lite-model_deeplabv3-mobilenetv2-ade20k_1_default_2.tflite in Resources */ = {isa = PBXBuildFile; fileRef = 1436D2112AF78CC100947DFF /* lite-model_deeplabv3-mobilenetv2-ade20k_1_default_2.tflite */; };
 		1436D21B2AF7943C00947DFF /* UIImage_Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1436D21A2AF7943C00947DFF /* UIImage_Extension.swift */; };
 		14457C3B2AC064DE000EBBFF /* satellite.png in Resources */ = {isa = PBXBuildFile; fileRef = 14457C3A2AC064DE000EBBFF /* satellite.png */; };
-		14457C3F2AC10C01000EBBFF /* ImageSegmentationHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14457C3E2AC10C01000EBBFF /* ImageSegmentationHelper.swift */; };
-		14457C412AC10C0C000EBBFF /* TFLiteExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14457C402AC10C0C000EBBFF /* TFLiteExtension.swift */; };
 		14457C452AC10CE2000EBBFF /* UIKitExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14457C442AC10CE2000EBBFF /* UIKitExtension.swift */; };
 		147818E82AB86437009FCFBA /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 147818E72AB86437009FCFBA /* AppDelegate.swift */; };
 		147818EA2AB86437009FCFBA /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 147818E92AB86437009FCFBA /* SceneDelegate.swift */; };
@@ -28,18 +24,17 @@
 		14DEC0912AC175FF00E3AB3A /* nlos.png in Resources */ = {isa = PBXBuildFile; fileRef = 14DEC0902AC175FF00E3AB3A /* nlos.png */; };
 		A1B2C3D4E5F6000000000001 /* SatViewAROrbit in Frameworks */ = {isa = PBXBuildFile; productRef = A1B2C3D4E5F6000000000003 /* SatViewAROrbit */; };
 		BD656443077FF1FF9D873A01 /* Pods_GnssFinder.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 391607379A3915C10960E8B8 /* Pods_GnssFinder.framework */; };
+		27229F5A2553406AB0569C73 /* SkySegmenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BA6C35D70E84F5898333D52 /* SkySegmenter.swift */; };
+		6D8211BAEC774B5BBED066D7 /* SkyMaskRenderer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 020975F7282646EF88F40F14 /* SkyMaskRenderer.swift */; };
+		A42686DC5BB24DA4B06190C9 /* SkySeg_large_256_trained.mlpackage in Sources */ = {isa = PBXBuildFile; fileRef = 62A111C64EE54AECBA57EEEB /* SkySeg_large_256_trained.mlpackage */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		1417AD562ABF2B1A008EF17D /* sat3.scn */ = {isa = PBXFileReference; lastKnownFileType = file.bplist; path = sat3.scn; sourceTree = "<group>"; };
 		1417AD582ABF3959008EF17D /* earth.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = earth.jpeg; sourceTree = "<group>"; };
 		1417AD5A2ABF396E008EF17D /* space.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = space.jpeg; sourceTree = "<group>"; };
-		1436D20F2AF78C0800947DFF /* sky_model_meta.tflite */ = {isa = PBXFileReference; lastKnownFileType = file; path = sky_model_meta.tflite; sourceTree = "<group>"; };
-		1436D2112AF78CC100947DFF /* lite-model_deeplabv3-mobilenetv2-ade20k_1_default_2.tflite */ = {isa = PBXFileReference; lastKnownFileType = file; path = "lite-model_deeplabv3-mobilenetv2-ade20k_1_default_2.tflite"; sourceTree = "<group>"; };
 		1436D21A2AF7943C00947DFF /* UIImage_Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIImage_Extension.swift; sourceTree = "<group>"; };
 		14457C3A2AC064DE000EBBFF /* satellite.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = satellite.png; sourceTree = "<group>"; };
-		14457C3E2AC10C01000EBBFF /* ImageSegmentationHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageSegmentationHelper.swift; sourceTree = "<group>"; };
-		14457C402AC10C0C000EBBFF /* TFLiteExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TFLiteExtension.swift; sourceTree = "<group>"; };
 		14457C442AC10CE2000EBBFF /* UIKitExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIKitExtension.swift; sourceTree = "<group>"; };
 		147818E42AB86437009FCFBA /* SatViewAR.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SatViewAR.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		147818E72AB86437009FCFBA /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -56,6 +51,9 @@
 		391607379A3915C10960E8B8 /* Pods_GnssFinder.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_GnssFinder.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		CEE1995C0D5265B609D988F5 /* Pods-GnssFinder.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GnssFinder.debug.xcconfig"; path = "Target Support Files/Pods-GnssFinder/Pods-GnssFinder.debug.xcconfig"; sourceTree = "<group>"; };
 		E5CC43E69F788F52954A8CA6 /* Pods-GnssFinder.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GnssFinder.release.xcconfig"; path = "Target Support Files/Pods-GnssFinder/Pods-GnssFinder.release.xcconfig"; sourceTree = "<group>"; };
+		5BA6C35D70E84F5898333D52 /* SkySegmenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SkySegmenter.swift; sourceTree = "<group>"; };
+		020975F7282646EF88F40F14 /* SkyMaskRenderer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SkyMaskRenderer.swift; sourceTree = "<group>"; };
+		62A111C64EE54AECBA57EEEB /* SkySeg_large_256_trained.mlpackage */ = {isa = PBXFileReference; lastKnownFileType = folder.mlpackage; path = SkySeg_large_256_trained.mlpackage; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -75,8 +73,7 @@
 			isa = PBXGroup;
 			children = (
 				1417AD562ABF2B1A008EF17D /* sat3.scn */,
-				1436D2112AF78CC100947DFF /* lite-model_deeplabv3-mobilenetv2-ade20k_1_default_2.tflite */,
-				1436D20F2AF78C0800947DFF /* sky_model_meta.tflite */,
+				62A111C64EE54AECBA57EEEB /* SkySeg_large_256_trained.mlpackage */,
 				1417AD582ABF3959008EF17D /* earth.jpeg */,
 				14457C3A2AC064DE000EBBFF /* satellite.png */,
 				1417AD5A2ABF396E008EF17D /* space.jpeg */,
@@ -112,10 +109,10 @@
 				147818E72AB86437009FCFBA /* AppDelegate.swift */,
 				147818E92AB86437009FCFBA /* SceneDelegate.swift */,
 				147818EB2AB86437009FCFBA /* ViewController.swift */,
+				020975F7282646EF88F40F14 /* SkyMaskRenderer.swift */,
+				5BA6C35D70E84F5898333D52 /* SkySegmenter.swift */,
 				147818FD2AB8711A009FCFBA /* DataManager.swift */,
 				147818ED2AB86437009FCFBA /* Main.storyboard */,
-				14457C3E2AC10C01000EBBFF /* ImageSegmentationHelper.swift */,
-				14457C402AC10C0C000EBBFF /* TFLiteExtension.swift */,
 				14457C442AC10CE2000EBBFF /* UIKitExtension.swift */,
 				147818FB2AB870F7009FCFBA /* Satellite.swift */,
 				147818F22AB86438009FCFBA /* LaunchScreen.storyboard */,
@@ -217,13 +214,11 @@
 			files = (
 				14457C3B2AC064DE000EBBFF /* satellite.png in Resources */,
 				147818F42AB86438009FCFBA /* LaunchScreen.storyboard in Resources */,
-				1436D2102AF78C0800947DFF /* sky_model_meta.tflite in Resources */,
 				14DEC0912AC175FF00E3AB3A /* nlos.png in Resources */,
 				1417AD572ABF2B1A008EF17D /* sat3.scn in Resources */,
 				147818F12AB86438009FCFBA /* Assets.xcassets in Resources */,
 				1417AD592ABF3959008EF17D /* earth.jpeg in Resources */,
 				1417AD5B2ABF396E008EF17D /* space.jpeg in Resources */,
-				1436D2122AF78CC100947DFF /* lite-model_deeplabv3-mobilenetv2-ade20k_1_default_2.tflite in Resources */,
 				147818EF2AB86437009FCFBA /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -260,10 +255,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				14457C412AC10C0C000EBBFF /* TFLiteExtension.swift in Sources */,
+				27229F5A2553406AB0569C73 /* SkySegmenter.swift in Sources */,
+				6D8211BAEC774B5BBED066D7 /* SkyMaskRenderer.swift in Sources */,
+				A42686DC5BB24DA4B06190C9 /* SkySeg_large_256_trained.mlpackage in Sources */,
 				147818EC2AB86437009FCFBA /* ViewController.swift in Sources */,
 				14457C452AC10CE2000EBBFF /* UIKitExtension.swift in Sources */,
-				14457C3F2AC10C01000EBBFF /* ImageSegmentationHelper.swift in Sources */,
 				147818FC2AB870F8009FCFBA /* Satellite.swift in Sources */,
 				1436D21B2AF7943C00947DFF /* UIImage_Extension.swift in Sources */,
 				147818FE2AB8711A009FCFBA /* DataManager.swift in Sources */,

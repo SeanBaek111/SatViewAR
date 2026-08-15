@@ -3,13 +3,15 @@ import CoreVideo
 import Foundation
 import Vision
 
-/// Core ML 하늘 분할 모델 래퍼.
+/// Wrapper around the Core ML sky segmentation model.
 ///
-/// 이전에 쓰던 TensorFlow Lite DeepLabV3(ADE20K 150클래스)를 대체한다.
-/// 우리가 필요한 것은 클래스 하나뿐이라 이진 분할 전용 모델이 훨씬 작고 빠르다.
-///   - 모델 크기: 47.3MB(2종) → 6.5MB
-///   - 추론 경로: UIImage 왕복 + CPU → CVPixelBuffer 직결 + Neural Engine
-///   - 실측: 3fps 이하 → 30fps
+/// Replaces the TensorFlow Lite DeepLabV3 segmenter (ADE20K, 150 classes) that was used
+/// before. Only one of those classes was ever read, and a model trained for that single
+/// binary question is both smaller and far faster.
+///   - Model size: 47.3 MB across two files, down to 6.5 MB
+///   - Inference path: UIImage round trip on the CPU, replaced by a CVPixelBuffer handed
+///     straight to the Neural Engine
+///   - Measured: under 3 fps, up to 30 fps
 final class SkySegmenter {
 
     struct Output {
@@ -38,11 +40,12 @@ final class SkySegmenter {
         self.visionModel = try VNCoreMLModel(for: model)
     }
 
-    /// ARFrame 의 카메라 버퍼를 그대로 받는다.
+    /// Segments a camera buffer taken straight from an `ARFrame`.
     ///
-    /// 예전 경로는 arView.snapshot() 으로 렌더된 화면을 찍었기 때문에
-    /// 위성 노드가 같이 찍히는 문제가 있었고, 그래서 캡처 직전에 노드를 숨겼다 되돌리는
-    /// 우회책이 필요했다. 원본 카메라 버퍼를 쓰면 그 문제 자체가 사라진다.
+    /// The previous path captured the rendered AR view with `arView.snapshot()`, which meant
+    /// the satellite markers were part of the image being segmented. Hiding every node before
+    /// the capture and restoring it afterwards worked around that. Reading the raw camera
+    /// buffer removes the problem instead of working around it.
     func segment(
         pixelBuffer: CVPixelBuffer,
         orientation: CGImagePropertyOrientation

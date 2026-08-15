@@ -1,8 +1,9 @@
-"""SatViewAR 의 pbxproj 에 Core ML 자산을 넣고 TFLite 자산을 뺀다.
+"""Adds the Core ML assets to SatViewAR's pbxproj and removes the TFLite ones.
 
-xcodeproj gem 이 설치본 기준 2022년 버전이라 최신 Xcode 가 쓰는
-XCLocalSwiftPackageReference 를 못 읽어서 직접 편집한다.
-출시된 앱이므로 원본을 백업하고, 변경 후에는 반드시 빌드로 확인한다.
+The installed xcodeproj gem dates from 2022 and cannot parse the
+XCLocalSwiftPackageReference that current Xcode writes, so the file is edited directly.
+This is a shipped app, so the original is backed up and the result must be verified
+with a build.
 
     python3 tools/update_project.py
 """
@@ -28,15 +29,15 @@ REMOVED = [
 ]
 
 GROUP_ANCHOR = {
-    # 각 그룹의 children 목록에서 기준으로 삼을 기존 항목.
-    # tflite 항목들은 이 스크립트가 먼저 지우므로 기준으로 쓸 수 없다.
+    # An existing entry in each group's children list to anchor the insertion against.
+    # The tflite entries are removed first, so they cannot serve as anchors.
     "gnssfinder": "ViewController.swift */,",
     "Assets": "sat3.scn */,",
 }
 
 
 def new_identifier() -> str:
-    """pbxproj 는 24자리 대문자 16진수 식별자를 쓴다."""
+    """pbxproj identifiers are 24 uppercase hex characters."""
     return uuid.uuid4().hex[:24].upper()
 
 
@@ -56,7 +57,7 @@ def main() -> None:
     shutil.copy(PROJECT, PROJECT.with_suffix(".pbxproj.backup"))
 
     text, dropped = drop_lines(original, REMOVED)
-    print(f"제거된 줄: {dropped}")
+    print(f"lines removed: {dropped}")
 
     build_file_lines = []
     file_ref_lines = []
@@ -78,36 +79,36 @@ def main() -> None:
         )
         sources_lines.append(f"\t\t\t\t{build_id} /* {name} in Sources */,")
 
-        # 해당 그룹의 children 에 파일 참조를 끼워 넣는다.
+        # Insert the file reference into that group's children.
         anchor = GROUP_ANCHOR[group]
         marker = [line for line in text.split("\n") if anchor in line]
         if not marker:
-            raise SystemExit(f"{group} 그룹의 기준 항목을 찾지 못했다: {anchor}")
+            raise SystemExit(f"anchor not found in group {group}: {anchor}")
         text = text.replace(
             marker[0], marker[0] + f"\n\t\t\t\t{file_id} /* {name} */,", 1
         )
-        print(f"추가: {name} → {group}")
+        print(f"added: {name} -> {group}")
 
-    # PBXBuildFile 구역
+    # PBXBuildFile section
     text = text.replace(
         "/* End PBXBuildFile section */",
         "\n".join(build_file_lines) + "\n/* End PBXBuildFile section */",
         1,
     )
-    # PBXFileReference 구역
+    # PBXFileReference section
     text = text.replace(
         "/* End PBXFileReference section */",
         "\n".join(file_ref_lines) + "\n/* End PBXFileReference section */",
         1,
     )
-    # Sources 빌드 단계
+    # Sources build phase
     marker = "\t\t\tisa = PBXSourcesBuildPhase;"
     index = text.index(marker)
     files_index = text.index("files = (", index) + len("files = (")
     text = text[:files_index] + "\n" + "\n".join(sources_lines) + text[files_index:]
 
     PROJECT.write_text(text)
-    print(f"저장 완료. 백업: {PROJECT.with_suffix('.pbxproj.backup').name}")
+    print(f"saved. backup: {PROJECT.with_suffix('.pbxproj.backup').name}")
 
 
 if __name__ == "__main__":

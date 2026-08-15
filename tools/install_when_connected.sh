@@ -1,8 +1,8 @@
 #!/bin/bash
-# 아이폰이 연결되기를 기다렸다가 서명 빌드 후 설치한다.
+# Waits for the iPhone to appear, then builds a signed app and installs it.
 #
-# 연결 상태만 폴링하므로 기다리는 동안 맥에 부하를 주지 않는다.
-# 진행 상황은 stdout 으로 나가고, 각 단계가 한 줄씩 찍힌다.
+# Only the connection state is polled, so waiting costs nothing.
+# Each stage prints one line to stdout.
 
 set -uo pipefail
 cd "$(dirname "$0")/.."
@@ -25,7 +25,7 @@ while true; do
 done
 
 echo "building..."
-if ! xcodebuild -workspace gnssfinder.xcworkspace -scheme GnssFinder \
+if ! xcodebuild -project GnssFinder.xcodeproj -scheme GnssFinder \
         -destination "id=$UDID" -allowProvisioningUpdates build > /tmp/satviewar_build.log 2>&1; then
     echo "BUILD FAILED - see /tmp/satviewar_build.log"
     grep -E "error:" /tmp/satviewar_build.log | head -5

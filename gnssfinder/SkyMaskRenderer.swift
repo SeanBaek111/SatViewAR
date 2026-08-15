@@ -2,28 +2,31 @@ import ARKit
 import CoreML
 import UIKit
 
-/// 모델 출력을 기존 파이프라인이 기대하는 형태의 UIImage 로 바꾼다.
+/// Turns the model output into the image shape the rest of the pipeline already expects.
 ///
-/// DataManager 는 위성의 화면 좌표에서 결과 이미지의 빨강 채널을 읽어 LOS 를 판정한다.
-/// 그 규약(하늘이면 빨강이 낮고, 막혔으면 높다)을 그대로 지키면
-/// DataManager 와 isLOS 는 한 줄도 고칠 필요가 없다.
+/// DataManager decides LOS by reading the red channel of the result image at each
+/// satellite's screen position. Honouring that contract, sky means a low red value and
+/// blocked means a high one, keeps DataManager and isLOS untouched.
 enum SkyMaskRenderer {
 
-    /// 예전 parseOutputBinary 가 쓰던 색을 그대로 유지한다.
-    /// isLOS 의 임계값(빨강 > 100 이면 막힘)이 이 값들에 의존한다.
-    private static let skyPixel: UInt32 = 0xFF_E6_E6_06      // ABGR little endian, R=6
-    private static let blockedPixel: UInt32 = 0xFF_DC_F5_F5  // R=245
+    /// The same colours the old parseOutputBinary produced. The isLOS threshold, red above
+    /// 100 means blocked, depends on these values.
+    private static let skyPixel: UInt32 = 0xFF_E6_E6_06      // ABGR little endian, R = 6
+    private static let blockedPixel: UInt32 = 0xFF_DC_F5_F5  // R = 245
 
-    /// 마스크를 화면 좌표계의 이미지로 만든다.
+    /// Renders the mask into view coordinates.
     ///
-    /// 카메라 버퍼와 화면은 좌표계가 다르다. ARSCNView 는 카메라 영상을 aspect-fill 로
-    /// 잘라서 보여주므로 가장자리가 화면 밖으로 나간다. 예전에는 렌더된 화면을 스크린샷으로
-    /// 찍었기 때문에 이 차이가 없었다. 이제 원본 버퍼를 쓰므로 ARKit 의 displayTransform 으로
-    /// 정확히 맞춰 준다. 이걸 빼먹으면 위성 판정이 화면 가장자리에서 어긋난다.
-    /// - Parameter viewportSize: 화면 크기(포인트). displayTransform 이 포인트 기준을 쓴다.
-    /// - Parameter scale: 화면 배율. 결과 이미지는 픽셀 해상도로 만든다.
-    ///   DataManager 가 넘기는 위성 좌표가 포인트에 배율을 곱한 픽셀 값이라 여기에 맞춰야 한다.
-    ///   예전 경로는 결과를 포인트 크기로 만들어서 화면 대부분의 위성이 범위 밖으로 빠졌다.
+    /// The camera buffer and the screen do not share a coordinate space. ARSCNView crops the
+    /// feed to aspect-fill, so parts of it fall outside the view. The old code sidestepped
+    /// this by screenshotting the rendered view. Now that the raw buffer is used, ARKit's
+    /// displayTransform does the mapping. Skipping it makes classification drift at the
+    /// edges of the screen.
+    ///
+    /// - Parameter viewportSize: view size in points, which is what displayTransform expects.
+    /// - Parameter scale: screen scale. The result is rendered at pixel resolution because
+    ///   the satellite positions DataManager passes in are points multiplied by that scale.
+    ///   The earlier code produced a point-sized image, so most satellites on screen fell
+    ///   outside its bounds and were never classified.
     static func viewSpaceImage(
         mask: MLMultiArray,
         frame: ARFrame,
@@ -53,7 +56,7 @@ enum SkyMaskRenderer {
             return nil
         }
 
-        // 화면 좌표를 정규화한 뒤 카메라 이미지 좌표로 되돌리는 변환.
+        // Maps a normalised screen point back into normalised camera image space.
         let displayTransform = frame.displayTransform(
             for: orientation, viewportSize: viewportSize
         ).inverted()
@@ -68,7 +71,7 @@ enum SkyMaskRenderer {
                 )
                 let inImage = normalized.applying(displayTransform)
 
-                // 화면에 보이는 영역이 카메라 이미지 밖으로 나가는 경우는 막힌 것으로 둔다.
+                // Anything that maps outside the camera image is treated as blocked.
                 guard inImage.x >= 0, inImage.x < 1, inImage.y >= 0, inImage.y < 1 else {
                     continue
                 }
@@ -85,7 +88,7 @@ enum SkyMaskRenderer {
         return makeImage(pixels: pixels, width: width, height: height)
     }
 
-    // MARK: - 보조
+    // MARK: - Helpers
 
     private static func skyFlags(mask: MLMultiArray, count: Int, threshold: Double) -> [Bool]? {
         guard mask.count >= count else {
